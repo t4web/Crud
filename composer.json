@@ -1,0 +1,32 @@
+{
+    "name": "t4web/crud",
+    "description": "ZF2 Module. Abstract layer for manage domain entity",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "module",
+        "zf2 module",
+        "domain",
+        "crud"
+    ],
+    "homepage": "https://github.com/t4web/Crud",
+    "authors": [
+        {
+            "name": "sebaks",
+            "email": "d.kirillof@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "zendframework/zend-eventmanager": "~2.5.0",
+        "zendframework/zend-http": "~2.5.0",
+        "zendframework/zend-modulemanager": "~2.5.0",
+        "zendframework/zend-mvc": "~2.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "T4web\\Crud\\": "src/"
+        }
+    }
+}
