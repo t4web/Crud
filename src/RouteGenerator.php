@@ -44,40 +44,38 @@ class RouteGenerator
                 $namespace = isset($options['backend']['namespace']) ? $options['backend']['namespace'] : '/admin';
 
                 if (in_array('new', $actions)) {
+                    $routeName = 'admin-' . $entity . '-new';
+                    $route = $namespace . '/' . $entity . '/new';
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['GET'],
                     ];
+                    $newOptions = [];
                     if (!empty($options['backend']['options']['new'])) {
-                        $routeOptions = array_merge($routeOptions, $options['backend']['options']['new']);
+                        $newOptions = $options['backend']['options']['new'];
                     }
 
-                    $route = Literal::factory([
-                        'route' => $namespace . '/' . $entity . '/new',
-                        'defaults' => $routeOptions
-                    ]);
-
-                    $this->router->addRoute('admin-' . $entity . '-new', $route);
+                    $this->addRoute($routeName, $route, $routeOptions, $newOptions);
                 }
                 if (in_array('create', $actions)) {
+                    $routeName = 'admin-' . $entity . '-create';
+                    $route = $namespace . '/' . $entity . '/create';
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['POST'],
                         'service' => $entity . '-crud-create-service',
                         'redirectTo' => 'admin-' . $entity . '-list',
                     ];
+                    $createOptions = [];
                     if (!empty($options['backend']['options']['create'])) {
-                        $routeOptions = array_merge($routeOptions, $options['backend']['options']['create']);
+                        $createOptions = $options['backend']['options']['create'];
                     }
 
-                    $route = Literal::factory([
-                        'route' => $namespace . '/' . $entity . '/create',
-                        'defaults' => $routeOptions
-                    ]);
-
-                    $this->router->addRoute('admin-' . $entity . '-create', $route);
+                    $this->addRoute($routeName, $route, $routeOptions, $createOptions);
                 }
                 if (in_array('read', $actions)) {
+                    $routeName = 'admin-' . $entity . '-read';
+                    $route = $namespace . '/' . $entity . '/read/:id';
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['GET'],
@@ -85,18 +83,16 @@ class RouteGenerator
                         'criteriaValidator' => $entity . '-crud-id-validator',
                         'service' => $entity . '-crud-read-service',
                     ];
+                    $readOptions = [];
                     if (!empty($options['backend']['options']['read'])) {
-                        $routeOptions = array_merge($routeOptions, $options['backend']['options']['read']);
+                        $readOptions = $options['backend']['options']['read'];
                     }
 
-                    $route = Segment::factory([
-                        'route' => $namespace . '/' . $entity . '/read/:id',
-                        'defaults' => $routeOptions
-                    ]);
-
-                    $this->router->addRoute('admin-' . $entity . '-read', $route);
+                    $this->addRoute($routeName, $route, $routeOptions, $readOptions);
                 }
                 if (in_array('update', $actions)) {
+                    $routeName = 'admin-' . $entity . '-update';
+                    $route = $namespace . '/' . $entity . '/update/:id';
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['POST'],
@@ -105,18 +101,16 @@ class RouteGenerator
                         'service' => $entity . '-crud-update-service',
                         'redirectTo' => 'admin-' . $entity . '-list',
                     ];
+                    $updateOptions = [];
                     if (!empty($options['backend']['options']['update'])) {
-                        $routeOptions = array_merge($routeOptions, $options['backend']['options']['update']);
+                        $updateOptions = $options['backend']['options']['update'];
                     }
 
-                    $route = Segment::factory([
-                        'route' => $namespace . '/' . $entity . '/update/:id',
-                        'defaults' => $routeOptions
-                    ]);
-
-                    $this->router->addRoute('admin-' . $entity . '-update', $route);
+                    $this->addRoute($routeName, $route, $routeOptions, $updateOptions);
                 }
                 if (in_array('delete', $actions)) {
+                    $routeName = 'admin-' . $entity . '-delete';
+                    $route = $namespace . '/' . $entity . '/delete/:id';
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['GET'],
@@ -125,53 +119,51 @@ class RouteGenerator
                         'service' => $entity . '-crud-delete-service',
                         'redirectTo' => 'admin-' . $entity . '-list',
                     ];
+                    $deleteOptions = [];
                     if (!empty($options['backend']['options']['delete'])) {
-                        $routeOptions = array_merge($routeOptions, $options['backend']['options']['delete']);
+                        $deleteOptions = $options['backend']['options']['delete'];
                     }
 
-                    $route = Segment::factory([
-                        'route' => $namespace . '/' . $entity . '/delete/:id',
-                        'defaults' => $routeOptions
-                    ]);
-
-                    $this->router->addRoute('admin-' . $entity . '-delete', $route);
+                    $this->addRoute($routeName, $route, $routeOptions, $deleteOptions);
                 }
-                if (in_array('delete-confirm', $actions)) {
-                    $routeOptions = [
-                        'controller' => 'sebaks-zend-mvc-controller',
-                        'allowedMethods' => ['GET'],
-                        'routeCriteria' => 'id',
-                        'criteriaValidator' => $entity . '-crud-id-validator',
-                    ];
-                    if (!empty($options['backend']['options']['delete-confirm'])) {
-                        $routeOptions = array_merge($routeOptions, $options['backend']['options']['delete-confirm']);
-                    }
 
-                    $route = Segment::factory([
-                        'route' => $namespace . '/' . $entity . '/delete/:id/confirm',
-                        'defaults' => $routeOptions
-                    ]);
-
-                    $this->router->addRoute('admin-' . $entity . '-delete-confirm', $route);
-                }
                 if (in_array('list', $actions)) {
+                    $routeName = 'admin-' . $entity . '-list';
+                    $route = $namespace . '/' . $entity . '/list';
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['GET'],
                         'service' => $entity . '-crud-list-service',
                     ];
+                    $listOptions = [];
                     if (!empty($options['backend']['options']['list'])) {
-                        $routeOptions = array_merge($routeOptions, $options['backend']['options']['list']);
+                        $listOptions = $options['backend']['options']['list'];
                     }
 
-                    $route = Segment::factory([
-                        'route' => $namespace . '/' . $entity . '/list',
-                        'defaults' => $routeOptions
-                    ]);
-
-                    $this->router->addRoute('admin-' . $entity . '-list', $route);
+                    $this->addRoute($routeName, $route, $routeOptions, $listOptions);
                 }
             }
         }
+    }
+
+    private function addRoute($routeName, $route, $routeOptions, $options)
+    {
+        if (isset($options['routeName'])) {
+            $routeName = $options['routeName'];
+            unset($options['routeName']);
+        }
+        if (isset($options['route'])) {
+            $route = $options['route'];
+            unset($options['route']);
+        }
+
+        $routeOptions = array_merge($routeOptions, $options);
+
+        $routeSegment = Segment::factory([
+            'route' => $route,
+            'defaults' => $routeOptions
+        ]);
+
+        $this->router->addRoute($routeName, $routeSegment);
     }
 }
