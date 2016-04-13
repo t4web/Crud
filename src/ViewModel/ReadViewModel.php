@@ -12,11 +12,13 @@ class ReadViewModel extends ViewModel
         $variable = parent::getVariable($name, $default);
 
         if ($name == 'result') {
-            if (! $variable instanceof EntityInterface) {
-                throw new \RuntimeException('Variable result must be instance of ' . EntityInterface::class . '. '
-                    . gettype($variable) . ' given');
+            if ($variable !== null) {
+                if (! $variable instanceof EntityInterface) {
+                    throw new \RuntimeException('Variable result must be instance of ' . EntityInterface::class . '. '
+                        . gettype($variable) . ' given');
+                }
+                $variable = $variable->extract();
             }
-            $variable = $variable->extract();
         }
 
         return $variable;

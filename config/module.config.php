@@ -16,5 +16,9 @@ return [
         'factories' => [
             RouteGenerator::class => RouteGeneratorFactory::class
         ],
+        'invokables' => [
+            \T4web\Crud\ViewModel\ReadViewModel::class => \T4web\Crud\ViewModel\ReadViewModel::class,
+            \T4web\Crud\ViewModel\ListViewModel::class => \T4web\Crud\ViewModel\ListViewModel::class,
+        ],
     ],
 ];
