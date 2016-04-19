@@ -24,6 +24,9 @@ class BaseValidator implements ValidatorInterface
      */
     public function isValid($data)
     {
+        if ($data === null) {
+            $data = [];
+        }
         $this->inputFilter->setData($data);
 
         return $this->inputFilter->isValid($data);
