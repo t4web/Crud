@@ -76,6 +76,10 @@ class RouteGenerator
                 if (in_array('read', $actions)) {
                     $routeName = 'admin-' . $entity . '-read';
                     $route = $namespace . '/' . $entity . '/read/:id';
+
+                    if (!empty($options['backend']['options']['read']['routeCriteria'])) {
+                        $route = $namespace . '/' . $entity . '/read/:' . $options['backend']['options']['read']['routeCriteria'];
+                    }
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['GET'],
@@ -87,12 +91,20 @@ class RouteGenerator
                     if (!empty($options['backend']['options']['read'])) {
                         $readOptions = $options['backend']['options']['read'];
                     }
+                    if (!empty($options['backend']['options']['read']['routeCriteria'])) {
+                        $readOptions['routeCriteria'] = $options['backend']['options']['read']['routeCriteria'];
+                    }
 
                     $this->addRoute($routeName, $route, $routeOptions, $readOptions);
                 }
                 if (in_array('update', $actions)) {
                     $routeName = 'admin-' . $entity . '-update';
                     $route = $namespace . '/' . $entity . '/update/:id';
+
+                    if (!empty($options['backend']['options']['update']['routeCriteria'])) {
+                        $route = $namespace . '/' . $entity . '/update/:' . $options['backend']['options']['update']['routeCriteria'];
+                    }
+
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['POST'],
@@ -111,6 +123,11 @@ class RouteGenerator
                 if (in_array('delete', $actions)) {
                     $routeName = 'admin-' . $entity . '-delete';
                     $route = $namespace . '/' . $entity . '/delete/:id';
+
+                    if (!empty($options['backend']['options']['delete']['routeCriteria'])) {
+                        $route = $namespace . '/' . $entity . '/delete/:' . $options['backend']['options']['delete']['routeCriteria'];
+                    }
+
                     $routeOptions = [
                         'controller' => 'sebaks-zend-mvc-controller',
                         'allowedMethods' => ['GET'],
