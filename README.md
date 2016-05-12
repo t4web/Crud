@@ -48,6 +48,13 @@ This module generate CRUD routes and provides basic CRUD methods and customizati
 - `delete` - action, which delete one entity, it validate criteria param and entry exists,
 - `list` - action, which display entities by criteria (filter)
 
+Also this module provide Abstract factories for creating Domain services by short alias:
+- `ENTITY_NAME-crud-create-service` - `T4webDomain\Service\Creator` will be created
+- `ENTITY_NAME-crud-read-service` - `T4web\Crud\Service\ReadService` will be created
+- `ENTITY_NAME-crud-update-service` - `T4webDomain\Service\Updater` will be created
+- `ENTITY_NAME-crud-delete-service` - `T4webDomain\Service\Deleter` will be created
+- `ENTITY_NAME-crud-list-service` - `T4web\Crud\Service\ListService` will be created
+
 ## Configuration options
 
 For use `T4web\Crud` featuers you must define `route-generation` config:
