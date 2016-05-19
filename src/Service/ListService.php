@@ -26,7 +26,7 @@ class ListService implements ServiceInterface
         if (empty($criteria['limit'])) {
             $criteria['limit'] = 20;
         }
-        if (empty($criteria['page'])) {
+        if (!isset($criteria['offset']) && empty($criteria['page'])) {
             $criteria['page'] = 1;
         }
         if (empty($criteria['order'])) {
