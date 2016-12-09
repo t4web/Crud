@@ -13,7 +13,7 @@ Add this project in your composer.json:
 
 ```json
 "require": {
-  "t4web/crud": "~0.1.0"
+  "t4web/crud": "~1.0.0"
 }
 ```
 
