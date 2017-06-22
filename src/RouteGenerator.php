@@ -152,7 +152,7 @@ class RouteGenerator
 
             if (in_array('list', $actions)) {
                 $routeName = 'admin-' . $entity . '-list';
-                $route = $namespace . '/' . $entity . '/list';
+                $route = $namespace . '/' . $entity . '/list[/]';
                 $routeOptions = [
                     'controller' => 'sebaks-zend-mvc-controller',
                     'allowedMethods' => ['GET'],
