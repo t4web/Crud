@@ -2,18 +2,18 @@
 
 namespace T4web\Crud;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Mvc\MvcEvent;
 
 class RouteGeneratorFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceManager)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var MvcEvent $event */
-        $event = $serviceManager->get('Application')->getMvcEvent();
+        $event = $container->get('Application')->getMvcEvent();
         $router = $event->getRouter();
-        $config = $serviceManager->get('config');
+        $config = $container->get('config');
         $options = [];
         if (isset($config['t4web-crud']['route-generation']) && is_array($config['t4web-crud']['route-generation'])) {
             $options = $config['t4web-crud']['route-generation'];
