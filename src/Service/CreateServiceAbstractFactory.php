@@ -2,13 +2,13 @@
 
 namespace T4web\Crud\Service;
 
-use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Interop\Container\ContainerInterface;
 use T4webDomain\Service\Creator;
 
 class CreateServiceAbstractFactory implements AbstractFactoryInterface
 {
-    public function canCreateServiceWithName(ServiceLocatorInterface $serviceManager, $name, $requestedName)
+    public function canCreate(ContainerInterface $container, $requestedName)
     {
         $explodedName = explode('-', $requestedName);
         return count($explodedName) == 4
@@ -17,16 +17,16 @@ class CreateServiceAbstractFactory implements AbstractFactoryInterface
             && $explodedName[3] == 'service';
     }
 
-    public function createServiceWithName(ServiceLocatorInterface $serviceManager, $name, $requestedName)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $explodedName = explode('-', $requestedName);
 
         $entity = ucfirst($explodedName[0]);
 
         return new Creator(
-            $serviceManager->get("$entity\\Infrastructure\\Repository"),
-            $serviceManager->get("$entity\\EntityFactory"),
-            $serviceManager->get("$entity\\EntityEventManager")
+            $container->get("$entity\\Infrastructure\\Repository"),
+            $container->get("$entity\\EntityFactory"),
+            $container->get("$entity\\EntityEventManager")
         );
     }
 }

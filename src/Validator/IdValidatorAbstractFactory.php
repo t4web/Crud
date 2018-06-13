@@ -2,12 +2,12 @@
 
 namespace T4web\Crud\Validator;
 
-use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class IdValidatorAbstractFactory implements AbstractFactoryInterface
 {
-    public function canCreateServiceWithName(ServiceLocatorInterface $serviceManager, $name, $requestedName)
+    public function canCreate(ContainerInterface $container, $requestedName)
     {
         $explodedName = explode('-', $requestedName);
         return count($explodedName) == 4
@@ -16,13 +16,13 @@ class IdValidatorAbstractFactory implements AbstractFactoryInterface
             && $explodedName[3] == 'validator';
     }
 
-    public function createServiceWithName(ServiceLocatorInterface $serviceManager, $name, $requestedName)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $explodedName = explode('-', $requestedName);
 
         $entity = $explodedName[0];
 
-        $entityExistValidator = $serviceManager->get("$entity-crud-entityexist-validator");
+        $entityExistValidator = $container->get("$entity-crud-entityexist-validator");
 
         return new IdValidator($entityExistValidator);
     }
