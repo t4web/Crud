@@ -19,11 +19,11 @@
     ],
     "require": {
         "php": ">=5.5",
-        "zendframework/zend-eventmanager": "<2.6 >=2.4",
-        "zendframework/zend-http": "<2.6 >=2.4",
-        "zendframework/zend-modulemanager": "<2.6 >=2.4",
-        "zendframework/zend-mvc": "<2.6 >=2.4",
-        "zendframework/zend-view": "<2.6 >=2.4",
+        "zendframework/zend-eventmanager": ">=2.6",
+        "zendframework/zend-http": ">=2.6",
+        "zendframework/zend-modulemanager": ">=2.6",
+        "zendframework/zend-mvc": ">=2.6",
+        "zendframework/zend-view": ">=2.6",
 
         "sebaks/controller": "~0.1.0",
         "t4web/domain": "~1.1.2"
