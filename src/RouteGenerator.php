@@ -2,9 +2,8 @@
 
 namespace T4web\Crud;
 
-use Zend\Mvc\Router\Http\TreeRouteStack as Router;
-use Zend\Mvc\Router\Http\Literal;
-use Zend\Mvc\Router\Http\Segment;
+use Zend\Router\Http\TreeRouteStack as Router;
+use Zend\Router\Http\Segment;
 
 class RouteGenerator
 {
